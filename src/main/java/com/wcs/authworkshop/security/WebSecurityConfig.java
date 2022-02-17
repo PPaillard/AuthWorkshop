@@ -10,10 +10,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.wcs.authworkshop.security.jwt.AuthEntryPointJwt;
 import com.wcs.authworkshop.security.jwt.AuthTokenFilter;
 import com.wcs.authworkshop.security.service.UserDetailsServiceImpl;
 
@@ -25,6 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsServiceImpl userDetailsServiceImpl;
 	
+	@Autowired
+	private AuthEntryPointJwt unauthorizedHandler;
+	
 	@Bean
 	public AuthTokenFilter getFilterToken() {
 		return new AuthTokenFilter();
@@ -33,7 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// activation des cors & desactivation des CSRF
-		http.cors().and().csrf().disable();
+		http.cors().and().csrf().disable().exceptionHandling()
+		.authenticationEntryPoint(unauthorizedHandler)
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(getFilterToken(), UsernamePasswordAuthenticationFilter.class);
 	}
