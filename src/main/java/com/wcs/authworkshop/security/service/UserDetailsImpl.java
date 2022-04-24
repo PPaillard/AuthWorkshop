@@ -1,6 +1,7 @@
 package com.wcs.authworkshop.security.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,7 +18,7 @@ public class UserDetailsImpl implements UserDetails{
 	
 	private String password;
 	
-	private List<Role> authorities;
+	private Set<Role> authorities;
 	
 	public static UserDetailsImpl build(User user) {
 		UserDetailsImpl userDetailsImpl = new UserDetailsImpl();
@@ -30,7 +31,7 @@ public class UserDetailsImpl implements UserDetails{
 	}
 	
 	@Override
-	public List<Role> getAuthorities() {
+	public Set<Role> getAuthorities() {
 		return this.authorities;
 	}
 
@@ -88,7 +89,7 @@ public class UserDetailsImpl implements UserDetails{
 		this.password = password;
 	}
 
-	public void setAuthorities(List<Role> authorities) {
+	public void setAuthorities(Set<Role> authorities) {
 		this.authorities = authorities;
 	}
 

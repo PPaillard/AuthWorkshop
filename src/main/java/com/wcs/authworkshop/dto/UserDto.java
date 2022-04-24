@@ -25,9 +25,6 @@ public class UserDto {
 	@NotNull
 	@Size(min = 3, max = 120)
 	private String password;
-	
-	@Size(min = 10, max = 10)
-	private String telephone;
 
 	public String getUsername() {
 		return username;
@@ -51,14 +48,5 @@ public class UserDto {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		if(telephone.equals("")) this.telephone = null;
-		else this.telephone = telephone;
 	}
 }

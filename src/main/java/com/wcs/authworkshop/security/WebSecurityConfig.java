@@ -30,7 +30,7 @@ import com.wcs.authworkshop.security.service.UserDetailsServiceImpl;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Value("${com.familleJaffre.p3.urlCors}")
+	@Value("${com.wcs.authworkshop.urlCors}")
 	private String urlsCors;
 	
 	@Autowired

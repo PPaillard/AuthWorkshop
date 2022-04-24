@@ -1,6 +1,6 @@
 package com.wcs.authworkshop.dto;
 
-import java.util.List;
+import java.util.Set;
 
 import com.wcs.authworkshop.entity.Role;
 
@@ -8,11 +8,11 @@ public class ConnectionResponseDto {
 
 	private String username;
 	
-	private List<Role> authorities;
+	private Set<Role> authorities;
 	
 	private String token;
 	
-	public ConnectionResponseDto(String username, List<Role> authorities, String token) {
+	public ConnectionResponseDto(String username, Set<Role> authorities, String token) {
 		this.username = username;
 		this.authorities = authorities;
 		this.token = token;
@@ -22,7 +22,7 @@ public class ConnectionResponseDto {
 		this.username = username;
 	}
 
-	public void setAuthorities(List<Role> authorities) {
+	public void setAuthorities(Set<Role> authorities) {
 		this.authorities = authorities;
 	}
 
@@ -34,7 +34,7 @@ public class ConnectionResponseDto {
 		return username;
 	}
 
-	public List<Role> getAuthorities() {
+	public Set<Role> getAuthorities() {
 		return authorities;
 	}
 

@@ -3,6 +3,7 @@ package com.wcs.authworkshop.entity;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,6 @@ public class User {
 	@Size(min = 3, max = 120)
 	private String password;
 	
-	@Temporal(TemporalType.DATE)
 	private LocalDate creation;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -53,7 +53,7 @@ public class User {
 		joinColumns = @JoinColumn(name="user_id"),
 		inverseJoinColumns = @JoinColumn(name="role_id")
 	)
-	private List<Role> authorities;
+	private Set<Role> authorities;
 
 	public Long getId() {
 		return id;
@@ -87,11 +87,11 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Role> getAuthorities() {
+	public Set<Role> getAuthorities() {
 		return authorities;
 	}
 
-	public void setAuthorities(List<Role> authorities) {
+	public void setAuthorities(Set<Role> authorities) {
 		this.authorities = authorities;
 	}
 
