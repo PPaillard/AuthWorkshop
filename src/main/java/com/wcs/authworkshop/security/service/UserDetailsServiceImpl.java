@@ -16,6 +16,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 
 	@Override
 	public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
+		// méthode utilisée de manière générique pour que Spring aille récup l'utilisateur qu'il veut connecter
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(()-> new UsernameNotFoundException("User with the name "+username+" not found !"));
 		

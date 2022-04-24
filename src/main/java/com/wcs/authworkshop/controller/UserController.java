@@ -1,5 +1,6 @@
 package com.wcs.authworkshop.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,6 @@ import com.wcs.authworkshop.security.jwt.JWTUtils;
 import com.wcs.authworkshop.security.service.UserDetailsImpl;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/users")
 public class UserController {
 
@@ -74,17 +74,21 @@ public class UserController {
 		// On verifie que le username et le mail n'existe pas déjà
 		if(userRepository.existsByEmail(userDto.getEmail()) || 
 			userRepository.existsByUsername(userDto.getUsername())) {
+			// si c'est le cas, on balance une exception
 			throw new ResponseStatusException(HttpStatus.CONFLICT);
 		}
 		
+		// on va chercher le rôle USER
 		Role role = roleRepository.findByAuthority(ERole.ROLE_USER.name())
 				.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		
+		// on créé le user avec les informations données
 		User user = new User();
 		user.setUsername(userDto.getUsername());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-		
+		user.setCreation(LocalDate.now());
+		// on lui ajoute son rôle de base
 		List<Role> roles = new ArrayList();
 		roles.add(role);
 		user.setAuthorities(roles);

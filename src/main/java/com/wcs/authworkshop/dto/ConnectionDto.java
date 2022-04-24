@@ -8,6 +8,9 @@ public class ConnectionDto {
 	@Size(min = 3, max = 50)
 	private String username;
 	
+	/*
+	 * Ajouter la verification du format (1maj, 1 chiffre, etc)
+	 */
 	@NotNull
 	@Size(min = 3, max = 120)
 	private String password;

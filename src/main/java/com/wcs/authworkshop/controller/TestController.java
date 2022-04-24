@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/tests")
 public class TestController {
+	
+	@GetMapping("/all")
+	public String recup() {
+		return "je fonctionne !";
+	}
 
 	
 	@PreAuthorize("hasRole('ADMIN')")

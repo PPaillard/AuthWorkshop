@@ -1,7 +1,16 @@
 package com.wcs.authworkshop.dto;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 public class UserDto {
 	@NotNull
@@ -9,12 +18,16 @@ public class UserDto {
 	private String username;
 	
 	@NotNull
+	@Email
 	@Size(min = 5, max = 100)
 	private String email;
 	
 	@NotNull
 	@Size(min = 3, max = 120)
 	private String password;
+	
+	@Size(min = 10, max = 10)
+	private String telephone;
 
 	public String getUsername() {
 		return username;
@@ -38,5 +51,14 @@ public class UserDto {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		if(telephone.equals("")) this.telephone = null;
+		else this.telephone = telephone;
 	}
 }

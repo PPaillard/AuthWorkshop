@@ -1,5 +1,7 @@
 package com.wcs.authworkshop.entity;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,9 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -36,6 +44,9 @@ public class User {
 	@NotNull
 	@Size(min = 3, max = 120)
 	private String password;
+	
+	@Temporal(TemporalType.DATE)
+	private LocalDate creation;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="user_role",
@@ -82,5 +93,13 @@ public class User {
 
 	public void setAuthorities(List<Role> authorities) {
 		this.authorities = authorities;
+	}
+
+	public LocalDate getCreation() {
+		return creation;
+	}
+
+	public void setCreation(LocalDate creation) {
+		this.creation = creation;
 	}
 }
