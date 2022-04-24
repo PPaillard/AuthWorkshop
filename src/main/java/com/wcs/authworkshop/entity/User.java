@@ -1,8 +1,6 @@
 package com.wcs.authworkshop.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -14,15 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -32,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	@NotNull
 	@Size(min = 3, max = 50)
@@ -54,12 +46,15 @@ public class User {
 		inverseJoinColumns = @JoinColumn(name="role_id")
 	)
 	private Set<Role> authorities;
+	
+	@ManyToMany(mappedBy = "users")
+	private Set<Article> articles;
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -101,5 +96,13 @@ public class User {
 
 	public void setCreation(LocalDate creation) {
 		this.creation = creation;
+	}
+
+	public Set<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(Set<Article> articles) {
+		this.articles = articles;
 	}
 }

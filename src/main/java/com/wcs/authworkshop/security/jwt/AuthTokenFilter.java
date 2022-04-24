@@ -57,7 +57,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 				// on stock ce userdetailsimpl dans le security context 
 				// dans le but de l'avoir de coté pour plus tard (pour spring et nous même )
 				UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(
-						user.getUsername(), null, user.getAuthorities());
+						user, null, user.getAuthorities());
 				
 				upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				

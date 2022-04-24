@@ -1,6 +1,5 @@
 package com.wcs.authworkshop.security.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +9,7 @@ import com.wcs.authworkshop.entity.User;
 
 public class UserDetailsImpl implements UserDetails{
 
-	private Long id;
+	private int id;
 	
 	private String email;
 	
@@ -65,11 +64,11 @@ public class UserDetailsImpl implements UserDetails{
 		return true;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
