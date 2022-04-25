@@ -47,7 +47,8 @@ public class User {
 	)
 	private Set<Role> authorities;
 	
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany
+	@JoinTable(name = "article_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
 	private Set<Article> articles;
 
 	public int getId() {
